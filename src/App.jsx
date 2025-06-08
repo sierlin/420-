@@ -29,7 +29,7 @@ export default function App() {
       )}
 
       <footer style={{ textAlign: "center", marginTop: 40, color: "#555" }}>
-        &copy; 2025 你的名字
+        无聊
       </footer>
     </div>
   );
