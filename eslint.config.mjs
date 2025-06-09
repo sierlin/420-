@@ -1,70 +1,70 @@
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import globals from 'globals'
-import tsParser from '@typescript-eslint/parser'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
+import antfu from '@antfu/eslint-config';
+import nextPlugin from '@next/eslint-plugin-next';
+import jestDom from 'eslint-plugin-jest-dom';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import playwright from 'eslint-plugin-playwright';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-export default [
+export default antfu(
   {
-    ignores: [],
+    react: true,
+    typescript: true,
+
+    // Configuration preferences
+    lessOpinionated: true,
+    isInEditor: false,
+
+    // Code style
+    stylistic: {
+      semi: true,
+    },
+
+    // Format settings
+    formatters: {
+      css: true,
+    },
+
+    // Ignored paths
+    ignores: [
+      'migrations/**/*',
+    ],
   },
-  js.configs.recommended,
-  ...compat.extends(
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'next',
-    'next/core-web-vitals'
-  ),
+  // --- Next.js Specific Rules ---
   {
     plugins: {
-      '@typescript-eslint': typescriptEslint,
+      '@next/next': nextPlugin,
     },
-
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.amd,
-        ...globals.node,
-      },
-
-      parser: tsParser,
-      ecmaVersion: 5,
-      sourceType: 'commonjs',
-
-      parserOptions: {
-        project: true,
-        tsconfigRootDir: __dirname,
-      },
-    },
-
     rules: {
-      'prettier/prettier': 'error',
-      'react/react-in-jsx-scope': 'off',
-
-      'jsx-a11y/anchor-is-valid': [
-        'error',
-        {
-          components: ['Link'],
-          specialLink: ['hrefLeft', 'hrefRight'],
-          aspects: ['invalidHref', 'preferButton'],
-        },
-      ],
-      'react/prop-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-      'react/no-unescaped-entities': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
     },
   },
-]
+  // --- Accessibility Rules ---
+  jsxA11y.flatConfigs.recommended,
+  // --- Testing Rules ---
+  {
+    files: [
+      '**/*.test.ts?(x)',
+    ],
+    ...jestDom.configs['flat/recommended'],
+  },
+  // --- E2E Testing Rules ---
+  {
+    files: [
+      '**/*.spec.ts',
+      '**/*.e2e.ts',
+    ],
+    ...playwright.configs['flat/recommended'],
+  },
+  // --- Custom Rule Overrides ---
+  {
+    rules: {
+      'antfu/no-top-level-await': 'off', // Allow top-level await
+      'style/brace-style': ['error', '1tbs'], // Use the default brace style
+      'ts/consistent-type-definitions': ['error', 'type'], // Use `type` instead of `interface`
+      'react/prefer-destructuring-assignment': 'off', // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
+      'node/prefer-global/process': 'off', // Allow using `process.env`
+      'test/padding-around-all': 'error', // Add padding in test files
+      'test/prefer-lowercase-title': 'off', // Allow using uppercase titles in test titles
+    },
+  },
+);
