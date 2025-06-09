@@ -1,45 +1,58 @@
 {
-  "name": "@11ty/font-awesome",
-  "version": "1.0.0-beta.11",
-  "type": "module",
-  "main": "plugin.js",
-  "description": "Optimized per-page tree-shaken SVG spritesheets for Eleventy.",
-  "publishConfig": {
-    "access": "public"
-  },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/11ty"
-  },
-  "author": "Zach Leatherman <zachleatherman@gmail.com> (https://zachleat.com/)",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/11ty/eleventy-plugin-font-awesome.git"
-  },
-  "bugs": "https://github.com/11ty/eleventy-plugin-font-awesome/issues",
-  "homepage": "https://github.com/11ty/eleventy-plugin-font-awesome",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
+  "name": "starlight-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
-    "update-prefixes": "node src/get-prefixes.js",
-    "test": "npx ava",
-    "demo": "npx @11ty/eleventy --input=demo --config=demo/eleventy.config.js",
-    "start": "npx @11ty/eleventy --input=demo --config=demo/eleventy.config.js --serve"
+    "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
+    "size": "size-limit",
+    "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
+    "format": "prettier -w --cache --plugin prettier-plugin-astro .",
+    "typecheck": "astro check --minimumSeverity warning --noSync && pnpm --filter starlight-docs typecheck"
   },
+  "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "3.0.1-alpha.4",
-    "ava": "^6.2.0"
+    "@astrojs/check": "^0.9.4",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.9",
+    "@size-limit/file": "^11.1.6",
+    "astro": "^5.6.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "size-limit": "^11.1.6",
+    "typescript": "^5.6.3"
   },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-regular-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "debug": "^4.4.0",
-    "entities": "^6.0.0",
-    "nanoid": "^5.1.0",
-    "posthtml-match-helper": "^2.0.3"
+  "packageManager": "pnpm@9.15.9",
+  "size-limit": [
+    {
+      "name": "/index.html",
+      "path": "examples/basics/dist/index.html",
+      "limit": "10 kB",
+      "gzip": true
+    },
+    {
+      "name": "/_astro/*.js",
+      "path": "examples/basics/dist/_astro/*.js",
+      "limit": "27 kB",
+      "gzip": true
+    },
+    {
+      "name": "/_astro/*.css",
+      "path": [
+        "examples/basics/dist/_astro/*.css",
+        "!examples/basics/dist/_astro/print.*.css"
+      ],
+      "limit": "14.75 kB",
+      "gzip": true
+    }
+  ],
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "playwright",
+        "search-insights"
+      ]
+    }
   }
 }
