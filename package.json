@@ -1,18 +1,45 @@
-
 {
-  "name": "immersive-homepage",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+  "name": "@11ty/font-awesome",
+  "version": "1.0.0-beta.11",
+  "type": "module",
+  "main": "plugin.js",
+  "description": "Optimized per-page tree-shaken SVG spritesheets for Eleventy.",
+  "publishConfig": {
+    "access": "public"
   },
-  "dependencies": {
-    "three": "^0.160.0",
-    "markdown-it": "^14.0.0",
-    "chart.js": "^4.4.0"
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/11ty"
+  },
+  "author": "Zach Leatherman <zachleatherman@gmail.com> (https://zachleat.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/11ty/eleventy-plugin-font-awesome.git"
+  },
+  "bugs": "https://github.com/11ty/eleventy-plugin-font-awesome/issues",
+  "homepage": "https://github.com/11ty/eleventy-plugin-font-awesome",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "update-prefixes": "node src/get-prefixes.js",
+    "test": "npx ava",
+    "demo": "npx @11ty/eleventy --input=demo --config=demo/eleventy.config.js",
+    "start": "npx @11ty/eleventy --input=demo --config=demo/eleventy.config.js --serve"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "@11ty/eleventy": "3.0.1-alpha.4",
+    "ava": "^6.2.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "debug": "^4.4.0",
+    "entities": "^6.0.0",
+    "nanoid": "^5.1.0",
+    "posthtml-match-helper": "^2.0.3"
   }
 }
