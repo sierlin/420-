@@ -1,16 +1,28 @@
 {
-  "name": "Contribute to Starlight",
-  "build": {
-    "dockerfile": "Dockerfile"
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "hostRequirements": {
+    "memory": "8gb"
   },
-  "postCreateCommand": "sudo corepack enable pnpm && pnpm config set store-dir /home/node/.pnpm-store && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 pnpm install",
-  "waitFor": "postCreateCommand",
+  "waitFor": "onCreateCommand",
+  "updateContentCommand": "yarn",
+  "postCreateCommand": "",
+  "postAttachCommand": "yarn dev",
   "customizations": {
     "codespaces": {
-      "openFiles": ["CONTRIBUTING.md"]
+      "openFiles": ["data/blog/code-sample.mdx"]
     },
     "vscode": {
-      "extensions": ["astro-build.astro-vscode", "esbenp.prettier-vscode"]
+      "settings": {
+        "editor.formatOnSave": true
+      },
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
     }
-  }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Nextjs server",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [3000]
 }
