@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "markdown-it": "^14.0.0",
+    "chart.js": "^4.4.0"
   },
   "devDependencies": {
     "vite": "^5.0.0"
