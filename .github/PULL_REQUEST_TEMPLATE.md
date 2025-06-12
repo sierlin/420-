@@ -1,13 +1,16 @@
-<!-- Thank you for opening a PR! We really appreciate you taking the time to help out 🙌 -->
+## Description
 
-#### Description
+<!-- Instructions and suggestions for crafting your PR -->
 
-- Closes # <!-- Add an issue number if this PR will close it. -->
-- What does this PR change? Give us a brief description.
-- Did you change something visual? A before/after screenshot can be helpful.
+<!----------------------------------------------------------------------
+- Please structure the PR title as `<type>[optional scope]: <description>`.
+- Clearly list the problem addressed, the reason for the change, and the implementation approach.
+- If this PR resolves an issue, include `resolves #number`.
+- If there are visual changes, consider attaching before/after screenshots.
+- Update necessary documentation or add a new post detailing the changes.
+- Are there any parts you think require more attention from me?
+----------------------------------------------------------------------->
 
-<!--
-Here’s what will happen next:
-One or more of our maintainers will take a look and may ask you to make changes.
-We try to be responsive, but don’t worry if this takes a day or two.
--->
+<!-- Response times may vary, but I aim to be as prompt as possible. -->
+
+<!-- Thank you for contributing! Your efforts are appreciated. 🙌 -->

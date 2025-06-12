@@ -1,39 +1,32 @@
 name: Release
 
+run-name: Release ${{ github.ref_name }}
+
 on:
-  workflow_run:
-    workflows: [CI]
-    types:
-      - completed
-    branches:
-      - main
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
 
 jobs:
   release:
-    strategy:
-      matrix:
-        node-version: [20.x]
-
-    name: Create a new release
+    if: github.repository == 'lin-stephanie/astro-antfustyle-theme'
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-      - run: npm ci
+          node-version: lts/*
 
       - name: Release
+        run: npx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release

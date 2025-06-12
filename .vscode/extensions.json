@@ -1,13 +1,19 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "mikestead.dotenv",
-    "bradlc.vscode-tailwindcss",
-    "vitest.explorer",
-    "humao.rest-client",
-    "yoavbls.pretty-ts-errors",
-    "ms-playwright.playwright",
-    "github.vscode-github-actions",
-    "lokalise.i18n-ally"
-  ]
+    // https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+    "EditorConfig.EditorConfig",
+
+    // https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+    "esbenp.prettier-vscode",
+
+    // https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
+    "astro-build.astro-vscode",
+
+    // https://marketplace.visualstudio.com/items?itemName=antfu.unocss
+    "antfu.unocss",
+
+    // https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx
+    "unifiedjs.vscode-mdx"
+  ],
+  "unwantedRecommendations": []
 }
